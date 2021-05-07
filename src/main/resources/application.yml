@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: online-cross-compiler-back
+
+server:
+  port: 8091
+  servlet:
+    context-path: /${spring.application.name}
+  error:
+    include-message: always
+    include-binding-errors: always
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
