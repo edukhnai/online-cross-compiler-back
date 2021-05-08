@@ -1,5 +1,6 @@
 package com.katedukhnai.online.cross.compiler.back.services.impl
 
+import com.katedukhnai.online.cross.compiler.back.configuration.properties.ScriptsDirectoryProperties
 import com.katedukhnai.online.cross.compiler.back.dto.CompileExecuteResponse
 import com.katedukhnai.online.cross.compiler.back.model.Command
 import com.katedukhnai.online.cross.compiler.back.model.SupportedLanguage.Companion.getAdditionalFileExtensionByBashAlias
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service
  * @author e.dukhnay
  */
 @Service
-class CompileExecuteServiceImpl : CompileExecuteService {
+class CompileExecuteServiceImpl(
+    private val scriptsDirectoryProperties: ScriptsDirectoryProperties
+) : CompileExecuteService {
 
     override fun compileExecute(
         command: Command,
@@ -35,9 +38,9 @@ class CompileExecuteServiceImpl : CompileExecuteService {
             )
         }
 
-        val compileExecuteCommand = "../${command.scriptName} -lg $languageBashAlias " +
+        val compileExecuteCommand = "${scriptsDirectoryProperties.path}${command.scriptName} -lg $languageBashAlias " +
             "-f ${mainScriptFile.name} ${additionalScriptFile?.name.takeIf { !it.isNullOrBlank() }}"
-        logger.info { "Created command $compileExecuteCommand" }
+        logger.debug { "Created command $compileExecuteCommand" }
 
         val process = Runtime.getRuntime().exec(compileExecuteCommand)
         process.waitFor()
@@ -46,14 +49,15 @@ class CompileExecuteServiceImpl : CompileExecuteService {
             stdOut = IOUtils.toString(process.inputStream, Charsets.UTF_8),
             stdErr = IOUtils.toString(process.errorStream, Charsets.UTF_8)
         ).also {
-            logger.info { "Compilation result: stdOut = ${it.stdOut}, stdErr = ${it.stdErr}" }
+            logger.debug { "Compilation result: stdOut = ${it.stdOut}, stdErr = ${it.stdErr}" }
+            mainScriptFile.delete()
+            additionalScriptFile?.delete()
         }
     }
 
     companion object {
-        private val logger = KotlinLogging.logger { }
-
         private const val MAIN_SCRIPT_FILENAME = "main_script"
         private const val ADDITIONAL_SCRIPT_FILENAME = "additional_script"
+        private val logger = KotlinLogging.logger { }
     }
 }
