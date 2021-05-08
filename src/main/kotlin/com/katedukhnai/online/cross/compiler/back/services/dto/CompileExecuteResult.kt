@@ -5,5 +5,5 @@ package com.katedukhnai.online.cross.compiler.back.services.dto
  */
 data class CompileExecuteResult(
     val stdOut: String,
-    val stdErr: String
+    val stdErr: String? = null
 )
