@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class CompileServiceImpl : CompileService {
 
     override fun compileScript(): CompileResult {
-        val process = Runtime.getRuntime().exec("cd")
+        val process = Runtime.getRuntime().exec("git status")
         process.waitFor()
         return CompileResult(
             stdOut = IOUtils.toString(process.inputStream, Charsets.UTF_8),
