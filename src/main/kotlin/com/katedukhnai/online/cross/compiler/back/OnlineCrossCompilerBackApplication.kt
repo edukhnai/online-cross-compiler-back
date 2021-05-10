@@ -15,8 +15,8 @@ class OnlineCrossCompilerBackApplication {
     fun corsConfigurer(): WebMvcConfigurer? {
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/compile").allowedOrigins("http://localhost:4200")
-                registry.addMapping("/compile-execute").allowedOrigins("http://localhost:4200")
+                registry.addMapping("/compile").allowedOrigins("https://diploma-bucket.website.yandexcloud.net")
+                registry.addMapping("/compile-execute").allowedOrigins("https://diploma-bucket.website.yandexcloud.net")
             }
         }
     }
