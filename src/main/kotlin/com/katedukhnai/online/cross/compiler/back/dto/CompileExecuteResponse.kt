@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CompileExecuteResponse(
-    @JsonProperty("std_out")
+    @JsonProperty("stdout")
     val stdOut: String,
-    @JsonProperty("std_err")
+    @JsonProperty("stderr")
     val stdErr: String? = null
 )

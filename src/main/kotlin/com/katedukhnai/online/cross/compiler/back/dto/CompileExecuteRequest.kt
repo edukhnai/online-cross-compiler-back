@@ -8,10 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class CompileExecuteRequest(
-    @JsonProperty("programming_language_bash_alias")
+    @JsonProperty("language")
     val programmingLanguageBashAlias: String,
-    @JsonProperty("main_script")
+    @JsonProperty("script")
     val mainScript: String,
-    @JsonProperty("additional_script")
+    @JsonProperty("kernel")
     val additionalScript: String? = null
 )

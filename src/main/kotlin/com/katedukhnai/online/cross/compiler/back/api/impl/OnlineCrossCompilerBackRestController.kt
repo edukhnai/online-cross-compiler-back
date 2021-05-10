@@ -4,6 +4,7 @@ import com.katedukhnai.online.cross.compiler.back.api.OnlineCrossCompilerBackApi
 import com.katedukhnai.online.cross.compiler.back.dto.CompileExecuteRequest
 import com.katedukhnai.online.cross.compiler.back.dto.CompileExecuteResponse
 import com.katedukhnai.online.cross.compiler.back.services.OnlineCrossCompilerBackService
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
