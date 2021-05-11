@@ -33,6 +33,8 @@ dependencies {
     implementation("commons-io:commons-io:2.8.0")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.springframework.boot:spring-boot-starter-validation:2.4.5")
+    implementation("org.springframework.security:spring-security-core:5.4.6")
+    implementation("org.springframework.boot:spring-boot-starter-security:2.4.5")
 }
 
 tasks.withType<KotlinCompile> {
